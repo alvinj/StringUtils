@@ -1,3 +1,6 @@
+/* uses sbt, which i installed with homebrew. */
+/* i don't think this requires the 'sbt plugin', but i configured it anyway. */
+
 pipeline {
     agent any
 
