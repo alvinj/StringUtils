@@ -519,6 +519,118 @@ class StringUtilsTests extends FunSuite {
     test("genRandomVariableLengthStringWithBlankSpaces tests") (pending)
 
 
+    /**
+     * containsWhitespace
+     * ------------------
+     */
+    test("`containsWhitespace`") {
+        var result = false
+        result = containsWhitespace("");     assert(result == false)
+        result = containsWhitespace("foo");  assert(result == false)
+
+        result = containsWhitespace("a b");  assert(result == true)
+        result = containsWhitespace(" a");   assert(result == true)
+        result = containsWhitespace("a ");   assert(result == true)
+        result = containsWhitespace(" a ");  assert(result == true)
+        result = containsWhitespace("a a");  assert(result == true)
+        result = containsWhitespace("a a "); assert(result == true)
+
+        result = containsWhitespace("\t"); assert(result == true)
+        result = containsWhitespace("a\t"); assert(result == true)
+        result = containsWhitespace("\ta"); assert(result == true)
+        result = containsWhitespace("a\tb"); assert(result == true)
+        result = containsWhitespace("a\t"); assert(result == true)
+
+        result = containsWhitespace("\r"); assert(result == true)
+        result = containsWhitespace("a\r"); assert(result == true)
+        result = containsWhitespace("\ra"); assert(result == true)
+        result = containsWhitespace("a\rb"); assert(result == true)
+        result = containsWhitespace("a\r"); assert(result == true)
+
+        result = containsWhitespace("\n"); assert(result == true)
+        result = containsWhitespace("a\n"); assert(result == true)
+        result = containsWhitespace("\na"); assert(result == true)
+        result = containsWhitespace("a\nb"); assert(result == true)
+        result = containsWhitespace("a\n"); assert(result == true)
+    }
+
+
+
+    /**
+     * isBlank
+     * -------
+     */
+    test("`isBlank`") {
+        var result = false
+
+        result = isBlank("");     assert(result == true)
+        result = isBlank(" ");    assert(result == true)
+        result = isBlank("   ");  assert(result == true)
+        result = isBlank("\t");   assert(result == true)
+        result = isBlank(" \t");  assert(result == true)
+        result = isBlank("\t ");  assert(result == true)
+        result = isBlank("\r");   assert(result == true)
+        result = isBlank("\n");   assert(result == true)
+
+        result = isBlank("foo");  assert(result == false)
+        result = isBlank("a ");   assert(result == false)
+        result = isBlank(" a");   assert(result == false)
+        result = isBlank(" a ");  assert(result == false)
+
+    }
+
+
+    /**
+     * isYes
+     * -----
+     */
+    test("`isYes`") {
+        var result = false
+
+        result = isYes("y", false);     assert(result == true)
+        result = isYes("Y", false);     assert(result == true)
+        result = isYes("yes", false);   assert(result == true)
+        result = isYes("YES", false);   assert(result == true)
+        result = isYes("Yes", false);   assert(result == true)
+        result = isYes("YEs", false);   assert(result == true)
+        result = isYes("yES", false);   assert(result == true)
+        result = isYes("yeS", false);   assert(result == true)
+
+        result = isYes("y ", false);    assert(result == true)
+        result = isYes(" y", false);    assert(result == true)
+        result = isYes(" y ", false);   assert(result == true)
+
+        result = isYes("n", false);     assert(result == false)
+        result = isYes("N", false);     assert(result == false)
+        result = isYes("no", false);    assert(result == false)
+        result = isYes("NO", false);    assert(result == false)
+        result = isYes("No", false);    assert(result == false)
+        result = isYes("nO", false);    assert(result == false)
+
+        result = isYes("", false);      assert(result == false)
+        result = isYes(" ", false);     assert(result == false)
+        result = isYes("", true);       assert(result == true)
+        result = isYes(" ", true);      assert(result == true)
+        result = isYes("\t", false);    assert(result == false)
+        result = isYes("\t", true);     assert(result == true)
+
+        result = isYes("foo", false);   assert(result == false)
+        result = isYes("a b", false);   assert(result == false)
+    }
+
+
+
+    /**
+     * booleanAsYOrN
+     * -------------
+     */
+    test("`booleanAsYOrN`") {
+        var result = ""
+        result = booleanAsYOrN(true);   assert(result == "y")
+        result = booleanAsYOrN(false);  assert(result == "n")
+    }
+
+
 }
 
 

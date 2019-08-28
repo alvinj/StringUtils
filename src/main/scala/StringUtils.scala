@@ -70,6 +70,20 @@ object StringUtils {
     def numbersOnly_?(s: String): Boolean = s.matches("[0-9]+")
 
     /**
+     * Returns true if the given string contains any whitespace at all.
+     * Assumes `s` is not null.
+     */
+    def containsWhitespace(s: String): Boolean = s.matches(".*\\s.*")
+
+    /**
+     * Returns true if the given string would be interpreted as being
+     * only blanks or whitespace.
+     * 
+     * Assumes `s` is not null.
+     */
+    def isBlank(s: String): Boolean = s.trim == ""
+
+    /**
      * A 'sanitize' method. Takes an input string, and returns a
      * new string with all characters removed from that string
      * other than letters and numbers. Note that it also removes blank spaces.
@@ -258,6 +272,33 @@ object StringUtils {
       * and `dePluralize` functions.
       */
     def removeTrailingS(s: String): String = s.dropRight(1)
+
+    /**
+     * Converts a boolean to a "y" (true) or "n" (false).
+     */
+    def booleanAsYOrN(b: Boolean): String = if (b) "y" else "n"
+
+    /**
+     * Returns `true` if the input string matches "y" or "yes".
+     * I use this when prompting users for Y/N input at the command line.
+     * `default` is used when the user types something other than 
+     * `[y|yes|n|no]`, such as when they hit [Enter] at the command line.
+     * 
+     * Assumes `userInput` is not null.
+     */
+    def isYes(userInput: String, default: Boolean): Boolean =
+        if (userInput.trim.equalsIgnoreCase("Y") || userInput.trim.equalsIgnoreCase("yes")) {
+            true
+        }
+        else if (userInput.trim.equalsIgnoreCase("N") || userInput.trim.equalsIgnoreCase("no")) {
+            false
+        }
+        else if (isBlank(userInput)) {
+            default
+        } else {
+            // note that the user can type in "foo" or anything else
+            default
+        }
 
 }
 

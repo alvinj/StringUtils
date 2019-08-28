@@ -16,4 +16,3 @@ scalacOptions ++= Seq(
     "-Xfatal-warnings"  //fail the compilation if there are any warnings
 )
 
-
